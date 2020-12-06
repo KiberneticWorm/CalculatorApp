@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Calculator.Classes;
+using Calculator.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -17,51 +19,42 @@ namespace Calculator.Windows
 
         public MainWindow()
         {
+            
             Label labArithExpression = new Label
             {
-                Text = "5 + 6",
+                Text = "",
+                Size = new Size(WIDTH - MARGIN_HORIZONTAL * 2, 20),
                 Font = new System.Drawing.Font("Times New Roman",
                     15.0f, System.Drawing.FontStyle.Regular),
-                Location = new System.Drawing.Point(8, 15)
+                Location = new System.Drawing.Point(MARGIN_HORIZONTAL, 15),
+                ForeColor = Color.White
             };
+
             Label labResult = new Label
             {
-                Text = "11",
+                Text = "",
+                Size = new Size(WIDTH - MARGIN_HORIZONTAL * 2, 33),
                 Font = new System.Drawing.Font("Times New Roman",
                     20.0f, System.Drawing.FontStyle.Regular),
-                Location = new System.Drawing.Point(5, 45)
+                Location = new System.Drawing.Point(MARGIN_HORIZONTAL, 45),
+                ForeColor = Color.White
             };
 
-            
+            Buttons buttons = new Buttons(labArithExpression, labResult, this);
 
-            var size = new System.Drawing.Size(
+            var screenSize = new System.Drawing.Size(
                 WIDTH + 2 * MARGIN_HORIZONTAL, 
                 HEIGHT + 2 * MARGIN_VERTICAL);
 
-            this.Size = size;
-            this.MinimumSize = size;
-            this.MaximumSize = size;
+            this.Size = screenSize;
+            this.MinimumSize = screenSize;
+            this.MaximumSize = screenSize;
+
+            this.BackColor = Color.FromArgb(51, 51, 51);
+
             this.Controls.Add(labArithExpression);
             this.Controls.Add(labResult);
-            this.Controls.Add(btn1);
-            this.Controls.Add(btn2);
-            this.Controls.Add(btn3);
-            this.Controls.Add(btn4);
-            this.Controls.Add(btn5);
-            this.Controls.Add(btn6);
-            this.Controls.Add(btn7);
-            this.Controls.Add(btn8);
-            this.Controls.Add(btn9);
-            this.Controls.Add(btn10);
-            this.Controls.Add(btn11);
-            this.Controls.Add(btn12);
-            this.Controls.Add(btn13);
-            this.Controls.Add(btn14);
-            this.Controls.Add(btn15);
-            this.Controls.Add(btn16);
-            this.Controls.Add(btn17);
-            this.Controls.Add(btn18);
-            this.Controls.Add(btn20);
+            
 
         }
         
