@@ -21,7 +21,7 @@ namespace Calculator.Classes
                 {
                     case '-':
                         return firstNumber - secondNumber;
-                    case '*':
+                    case 'x':
                         return firstNumber * secondNumber;
                     case '/':
                         return firstNumber / secondNumber;

@@ -27,6 +27,7 @@ namespace Calculator.Classes
         private string firstNumber = "";
         private string secondNumber = "";
         private char signOperation = ' ';
+        private string brackets = "";
 
         private int screenWidth;
         private int marginHorizontal;
@@ -70,10 +71,25 @@ namespace Calculator.Classes
         private void btnClickToCalculate(object sender, EventArgs args)
         {
             var btn = sender as Button;
+            if (this.secondNumber.Equals("") || this.secondNumber[0] != '-')
+                brackets = "";
             switch (btn.Name)
             {
-                case "btnRemaind":
                 case "btnMinus":
+                    if (this.firstNumber.Equals(""))
+                    {
+                        this.firstNumber += "-";
+                    } else if (this.signOperation == ' ')
+                    {
+                        this.signOperation = btn.Text[0];
+                    } else if (this.secondNumber.Equals(""))
+                    {
+                        this.secondNumber += "-";
+                        brackets = "()";
+                    }
+                    break;
+
+                case "btnRemaind":
                 case "btnPlus":
                 case "btnMul":
                 case "btnDiv":
@@ -86,7 +102,11 @@ namespace Calculator.Classes
                 case "btnDel":
                     
                     var exprText = labExpression.Text;
-                    if (!this.secondNumber.Equals(""))
+                    if (this.secondNumber.Equals("-"))
+                    {
+                        this.secondNumber = "";
+                        this.brackets = "";
+                    } else if (!this.secondNumber.Equals(""))
                     {
                         this.secondNumber = this.secondNumber.Substring(0, this.secondNumber.Length - 1);
                     } else if (signOperation != ' ')
@@ -153,10 +173,20 @@ namespace Calculator.Classes
                         this.secondNumber, this.signOperation).ToString();
                     break;
             }
+            var secondNumberBracked = "";
+            if (!brackets.Equals(""))
+            {
+                secondNumberBracked += brackets[0] +
+                    this.secondNumber + brackets[1];
+            } else
+            {
+                secondNumberBracked = this.secondNumber;
+            }
+
             labExpression.Text = (
                 this.firstNumber + " " +
                 this.signOperation + " " +
-                this.secondNumber);
+                secondNumberBracked);
         }
 
         private void btnDelMouseDown(object sender, MouseEventArgs args)
